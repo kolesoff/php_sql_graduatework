@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class TopicController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -15,7 +25,6 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::all();
-      // dd($topics[1]->questions->count());
         return view('topic.index', compact('topics'));
     }
 

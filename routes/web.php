@@ -8,7 +8,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('user', 'UserController');
+Route::resource('user', 'UserController', ['except'=>[
+  'destroy'
+]]);
 
 Route::resource('topic', 'TopicController', ['except'=>[
     'edit', 'update'    
