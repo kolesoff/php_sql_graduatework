@@ -8,11 +8,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('user', 'UserController', ['except'=>[
+Route::resource('user', 'UserController', ['middleware' => 'auth', 'except'=>[
   'destroy'
 ]]);
 
-Route::resource('topic', 'TopicController', ['except'=>[
+Route::resource('topic', 'TopicController', ['middleware' => 'auth', 'except'=>[
     'edit', 'update'    
 ]]);
 
