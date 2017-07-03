@@ -51,6 +51,7 @@
       <table class="table table-condensed">
         <tr>
           <th>#</th>
+          <th>№</th>
           <th>Aвтор</th>
           <th>Емайл</th>
           <th>Вопрос</th>
@@ -63,6 +64,7 @@
         @foreach ($topic->questions as $question)
         <tr>
           <td>{{ $loop->iteration }}</td>
+          <td>{{ $question->id }}</td>
           <td>{{ $question->author }}</td>
           <td>{{ $question->email }}</td>
           <td>{{ $question->question }}</td>

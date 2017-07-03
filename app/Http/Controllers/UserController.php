@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -38,9 +39,10 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:1|max:50',
-            'email' => 'required|max:50',
+            'email' => 'required|max:50|unique:users',
             'password' => 'required'
         ]);
+        Log::info('Зарегистрирован администратор "'.$request->name.'"');
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -57,7 +59,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        // 
     }
 
     /**
@@ -84,6 +86,7 @@ class UserController extends Controller
             'password' => 'required',
             'password_repeat' => 'required|same:password'
         ]);
+        Log::info('Изменен пароль администратора "'.$user->name.'"');
         $user->password = bcrypt($request->password);
         $user->save();
         return redirect()->route('user.index');

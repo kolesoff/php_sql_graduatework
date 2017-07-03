@@ -9,7 +9,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('user', 'UserController', ['middleware' => 'auth', 'except'=>[
-  'destroy'
+  'show', 'destroy'
 ]]);
 
 Route::resource('topic', 'TopicController', ['middleware' => 'auth', 'except'=>[

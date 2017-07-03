@@ -7,6 +7,7 @@ use App\Question;
 use Illuminate\Http\Request;
 use App\Http\Requests\QuestionRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class QuestionController extends Controller
 {
@@ -81,9 +82,22 @@ class QuestionController extends Controller
     public function update(QuestionRequest $request, Question $question)
     {
         if (Auth::check()) {
-        $question->update($request->except('_token'));
-        return redirect('/home');
+            if ($question->status !== 'public' && $request->status === 'public') {
+                Log::info('Админ опубликовал вопрос ('.$question->id.') из темы "'.$question->topic->topic.'"');
+            }
+
+            if ($question->status !== 'hidden' && $request->status === 'hidden') {
+                Log::info('Админ скрыл вопрос ('.$question->id.') из темы "'.$question->topic->topic.'"');
+            }
+
+            if ($question->author !== $request->author || $question->question !== $request->question || $question->answer !== $request->answer) {
+                Log::info('Админ обновил вопрос ('.$question->id.') из темы "'.$question->topic->topic.'"');
+            }
+
+            $question->update($request->except('_token'));
+            return redirect('/home');
         }
+
         return redirect()->route('question.index');
     }
 
@@ -96,6 +110,8 @@ class QuestionController extends Controller
     public function destroy(Question $question)
     {
         if (Auth::check()) {
+            Log::info('Админ удалил вопрос ('.$question->id.') из темы "'.$question->topic->topic.'"');
+
             $question->delete();
             return redirect('/home');
         }
