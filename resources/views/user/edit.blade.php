@@ -11,14 +11,14 @@
           <div class="form-group">
             <label for="password" class="col-sm-3 control-label">Пароль</label>
             <div class="col-sm-9">
-              <input type="password" name="password" class="form-control" id="password">
+              <input type="password" name="password" required class="form-control" id="password">
             </div>
           </div>
 
           <div class="form-group">
             <label for="password" class="col-sm-3 control-label">Повторите пароль</label>
             <div class="col-sm-9">
-              <input type="password" name="password_repeat" class="form-control" id="password">
+              <input type="password" name="password_repeat" required class="form-control" id="password">
             </div>
           </div>
 

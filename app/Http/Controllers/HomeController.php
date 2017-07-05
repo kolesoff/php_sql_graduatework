@@ -6,6 +6,7 @@ use App\User;
 use App\Topic;
 use App\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {

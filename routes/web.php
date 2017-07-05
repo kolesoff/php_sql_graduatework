@@ -16,4 +16,6 @@ Route::resource('topic', 'TopicController', ['middleware' => 'auth', 'except'=>[
     'edit', 'update'    
 ]]);
 
-Route::resource('question', 'QuestionController');
+Route::resource('question', 'QuestionController', ['except'=>[
+  'show'
+]]);

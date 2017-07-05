@@ -42,12 +42,14 @@ class UserController extends Controller
             'email' => 'required|max:50|unique:users',
             'password' => 'required'
         ]);
+
         Log::info('Зарегистрирован администратор "'.$request->name.'"');
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
+        
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
         return redirect()->route('user.index');
     }
 
@@ -86,7 +88,9 @@ class UserController extends Controller
             'password' => 'required',
             'password_repeat' => 'required|same:password'
         ]);
+
         Log::info('Изменен пароль администратора "'.$user->name.'"');
+
         $user->password = bcrypt($request->password);
         $user->save();
         return redirect()->route('user.index');

@@ -10,13 +10,13 @@
             <div class="form-group">
               <label for="author" class="col-sm-3 control-label">Имя</label>
               <div class="col-sm-9">
-                <input type="text" name="author" class="form-control" id="name" value="{{ old('author') }}">
+                <input type="text" name="author" required class="form-control" id="name" value="{{ old('author') }}">
               </div>
             </div>
             <div class="form-group">
               <label for="email" class="col-sm-3 control-label">Емайл</label>
               <div class="col-sm-9">
-                <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}">
+                <input type="email" name="email" required class="form-control" id="email" value="{{ old('email') }}">
               </div>
             </div>
             <div class="form-group">
@@ -32,7 +32,7 @@
             <div class="form-group">
               <label for="question" class="col-sm-3 control-label">Ваш вопрос</label>
               <div class="col-sm-9">
-                <textarea name="question" class="form-control" rows="3">{{ old('question') }}</textarea>
+                <textarea name="question" required class="form-control" rows="3">{{ old('question') }}</textarea>
               </div>
             </div>
             <button type="submit" class="col-sm-12 btn btn-primary">Отправить</button>

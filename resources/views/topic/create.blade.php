@@ -10,7 +10,7 @@
             <div class="form-group">
               <label for="topic" class="col-sm-3 control-label">Название темы</label>
               <div class="col-sm-9">
-                <input type="text" name="topic" class="form-control" id="topic">
+                <input type="text" name="topic" required class="form-control" id="topic">
               </div>
             </div>
 

@@ -6,6 +6,7 @@
     <table class="table table-condensed">
       <tr>
         <th>#</th>
+        <th>№</th>
         <th>Aвтор</th>
         <th>Емайл</th>
         <th>Вопрос</th>
@@ -20,14 +21,15 @@
         @if ($question->status == 'expected')
           <tr>
             <td>{{ $i }}</td>
+            <td>{{ $question->id }}</td>
             <td>{{ $question->author }}</td>
             <td>{{ $question->email }}</td>
             <td>{{ $question->question }}</td>
             <td>{{ $question->answer }}</td>
             <td>
-              @if ($question->status == 'expected')
+              @if ($question->isExpected())
                 ожидает ответа
-              @elseif ($question->status == 'public')
+              @elseif ($question->isPublic())
                 опубликован
               @else
                 скрыт

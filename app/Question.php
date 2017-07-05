@@ -11,4 +11,16 @@ class Question extends Model
     public function topic() {
         return $this->belongsTo('App\Topic');
     }
+
+    public function isExpected() {
+        return ($this->status == 'expected');
+    }
+
+    public function isPublic() {
+        return ($this->status == 'public');
+    }
+
+    public function isHidden() {
+        return ($this->status == 'hidden');
+    }
 }

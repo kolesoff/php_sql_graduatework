@@ -23,7 +23,7 @@
           <hr>
             @foreach ($topic->questions as $question)
               @isset($question['answer'])
-                @if ($question['status'] == 'public')
+                @if ($question->isPublic())
                   <div class="panel-heading" role="tab" id="heading{{ $loop->parent->index }}{{ $loop->index }}">
                     <h4 class="panel-title">
                       <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $loop->parent->index }}{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->parent->index }}{{ $loop->index }}">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class TopicController extends Controller
@@ -40,7 +41,11 @@ class TopicController extends Controller
         $this->validate($request, [
             'topic' => 'required|min:1|max:50|unique:topics,topic',
         ]);
-        Log::info('Админ создал тему "'.$request->topic.'"');
+        
+        $user = Auth::user();
+
+        Log::info($user->name.' создал тему "'.$request->topic.'"');
+
         Topic::create($request->except(['_token']));
         return redirect()->route('topic.index');
     }
@@ -87,7 +92,10 @@ class TopicController extends Controller
      */
     public function destroy(Topic $topic)
     {
-        Log::info('Админ удалил тему "'.$topic->topic.'"');
+        $user = Auth::user();
+
+        Log::info($user->name.' удалил тему "'.$topic->topic.'"');
+        
         $topic->delete();
         return redirect()->route('topic.index');
     }
