@@ -19,3 +19,7 @@ Route::resource('topic', 'TopicController', ['middleware' => 'auth', 'except'=>[
 Route::resource('question', 'QuestionController', ['except'=>[
   'show'
 ]]);
+
+Route::resource('question', 'QuestionController', ['middleware' => 'auth', 'only'=>[
+  'edit', 'update', 'destroy'
+]]);

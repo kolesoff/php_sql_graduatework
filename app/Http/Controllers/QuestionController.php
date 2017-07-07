@@ -11,18 +11,6 @@ use Illuminate\Support\Facades\Log;
 
 class QuestionController extends Controller
 {
-        /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth', ['only' => [
-            'edit', 'update', 'destroy'
-        ]]);
-    }
-
     /**
      * Display a listing of the resource.
      *

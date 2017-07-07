@@ -23,4 +23,8 @@ class Question extends Model
     public function isHidden() {
         return ($this->status == 'hidden');
     }
+
+    public function scopeExpected($query) {
+        return $query->where('status', 'expected');
+    }
 }

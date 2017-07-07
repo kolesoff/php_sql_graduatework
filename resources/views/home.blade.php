@@ -10,37 +10,21 @@
         <th>Aвтор</th>
         <th>Емайл</th>
         <th>Вопрос</th>
-        <th>Ответ</th>
-        <th>Статус</th>
         <th>Создано</th>
         <th>Обновлено</th>
         <th>Редактировать</th>
       </tr>
-      @php $i = 1; @endphp
       @foreach ($questions as $question)
-        @if ($question->status == 'expected')
-          <tr>
-            <td>{{ $i }}</td>
-            <td>{{ $question->id }}</td>
-            <td>{{ $question->author }}</td>
-            <td>{{ $question->email }}</td>
-            <td>{{ $question->question }}</td>
-            <td>{{ $question->answer }}</td>
-            <td>
-              @if ($question->isExpected())
-                ожидает ответа
-              @elseif ($question->isPublic())
-                опубликован
-              @else
-                скрыт
-              @endif
-            </td>
-            <td>{{ $question->created_at }}</td>
-            <td>{{ $question->updated_at }}</td>
-            <td><a class="btn btn-primary btn-xs" href="{{ route('question.edit', [$question->id]) }}" role="button">&gt;</a></td>
-          </tr>
-          @php $i++; @endphp
-        @endif
+        <tr>
+          <td>{{ $loop->iteration }}</td>
+          <td>{{ $question->id }}</td>
+          <td>{{ $question->author }}</td>
+          <td>{{ $question->email }}</td>
+          <td>{{ $question->question }}</td>
+          <td>{{ $question->created_at }}</td>
+          <td>{{ $question->updated_at }}</td>
+          <td><a class="btn btn-primary btn-xs" href="{{ route('question.edit', [$question->id]) }}" role="button">&gt;</a></td>
+        </tr>
       @endforeach
     </table>
   @endif
@@ -72,9 +56,9 @@
           <td>{{ $question->question }}</td>
           <td>{{ $question->answer }}</td>
           <td>
-            @if ($question->status == 'expected')
+            @if ($question->isExpected())
               ожидает ответа
-            @elseif ($question->status == 'public')
+            @elseif ($question->isPublic())
               опубликован
             @else
               скрыт

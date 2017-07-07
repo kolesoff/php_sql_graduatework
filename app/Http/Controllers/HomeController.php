@@ -6,7 +6,6 @@ use App\User;
 use App\Topic;
 use App\Question;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -29,7 +28,7 @@ class HomeController extends Controller
     {
         $users = User::all();
         $topics = Topic::all();
-        $questions = Question::all();
+        $questions = Question::expected()->get();
         return view('home', compact('users', 'topics', 'questions'));
     }
 }
