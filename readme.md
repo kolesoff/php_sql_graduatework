@@ -1,3 +1,18 @@
+# Сервис вопросов и ответов
+
+## Инструкции по установке и первому запуску
+
+1. Клонировать репозиторий в папку проекта. Команда: git clone https://github.com/kolesoff/php_sql_graduatework.git
+2. Перейти в папку проекта, выполнив команду: cd projectName
+3. Установить composer, выполнив в папке проекта команду: composer install
+4. Создать в корневой папке проекта файл .env и скопировать в него все данные из файла .env.example
+5. В файле .env настроить соединение на чистую базу данных
+6. Выполнить в папке проекта команду: php artisan key:generate
+7. Выполнить в папке проекта команду: php artisan migrate
+8. Выполнить в папке проекта команду: php artisan db:
+
+****************************************************************
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
