@@ -23,7 +23,7 @@
           <td>{{ $question->question }}</td>
           <td>{{ $question->created_at }}</td>
           <td>{{ $question->updated_at }}</td>
-          <td><a class="btn btn-primary btn-xs" href="{{ route('question.edit', [$question->id]) }}" role="button">&gt;</a></td>
+          <td><a class="btn btn-primary btn-xs" href="{{ route('admin.question.edit', [$question->id]) }}" role="button">&gt;</a></td>
         </tr>
       @endforeach
     </table>
@@ -66,7 +66,7 @@
           </td>
           <td>{{ $question->created_at }}</td>
           <td>{{ $question->updated_at }}</td>
-          <td><a class="btn btn-primary btn-xs" href="{{ route('question.edit', [$question->id]) }}" role="button">&gt;</a></td>
+          <td><a class="btn btn-primary btn-xs" href="{{ route('admin.question.edit', [$question->id]) }}" role="button">&gt;</a></td>
         </tr>
         @endforeach
       </table>

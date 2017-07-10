@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Topic;
 use App\Question;
 use Illuminate\Http\Request;
 use App\Http\Requests\QuestionRequest;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -18,9 +19,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $topics = Topic::all();
-        $questions = Question::all();
-        return view('question.index', compact('topics', 'questions'));
+        //
     }
 
     /**
@@ -30,8 +29,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        $topics = Topic::all();
-        return view('question.create', compact('topics'));
+        //
     }
 
     /**
@@ -40,10 +38,9 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(QuestionRequest $request)
+    public function store(Request $request)
     {
-        Question::create($request->except(['_token']));
-        return redirect()->route('question.index');
+        //
     }
 
     /**
@@ -54,7 +51,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        // 
+        //
     }
 
     /**
@@ -65,7 +62,8 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        // 
+        $topics = Topic::all();
+        return view('admin.question.edit', compact('topics', 'question'));
     }
 
     /**
@@ -77,7 +75,22 @@ class QuestionController extends Controller
      */
     public function update(QuestionRequest $request, Question $question)
     {
-        // 
+        $user = Auth::user();
+
+        if ($question->status != 'public' && $request->status == 'public') {
+            Log::info($user->name.' опубликовал вопрос ('.$question->id.') из темы "'.$question->topic->topic.'"');
+        }
+
+        if ($question->status != 'hidden' && $request->status == 'hidden') {
+            Log::info($user->name.' скрыл вопрос ('.$question->id.') из темы "'.$question->topic->topic.'"');
+        }
+
+        if ($question->author != $request->author || $question->question != $request->question || $question->answer != $request->answer) {
+            Log::info($user->name.' обновил вопрос ('.$question->id.') из темы "'.$question->topic->topic.'"');
+        }
+
+        $question->update($request->except('_token'));
+        return redirect()->route('home');
     }
 
     /**
@@ -88,6 +101,11 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        // 
+        $user = Auth::user(); 
+        
+        Log::info($user->name.' удалил вопрос ('.$question->id.') из темы "'.$question->topic->topic.'"');
+
+        $question->delete();
+        return redirect()->route('home');
     }
 }

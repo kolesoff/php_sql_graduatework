@@ -5,7 +5,7 @@
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
         <div class="panel-body">
-          <form class="form-horizontal" role="form" action="{{ route('question.update', [$question->id]) }}" method="POST">
+          <form class="form-horizontal" role="form" action="{{ route('admin.question.update', [$question->id]) }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
             <div class="form-group">
@@ -58,7 +58,7 @@
             <hr>
             <button type="submit" class="col-sm-4 col-sm-offset-1 btn btn-primary">Применить</button>
           </form>
-          <form action="{{ route('question.destroy', [$question->id]) }}" method="POST">
+          <form action="{{ route('admin.question.destroy', [$question->id]) }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
             <button type="submit" class="col-sm-4 col-sm-offset-2 btn btn-danger">Удалить</button>

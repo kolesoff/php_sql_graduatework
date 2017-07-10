@@ -16,10 +16,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except'=>[
         'show', 'destroy'
     ]]);
+
     Route::resource('topic', 'TopicController', ['except'=>[
         'edit', 'update'    
     ]]);
-    Route::resource('question', 'QuestionController', ['only'=>[
-        'edit', 'update', 'destroy'
-    ]]);
+    
+    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+        Route::resource('question', 'Admin\QuestionController', ['only'=>[
+            'edit', 'update', 'destroy'
+        ]]);
+    });
 });
