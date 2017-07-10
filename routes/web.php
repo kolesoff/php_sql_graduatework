@@ -8,12 +8,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('question', 'QuestionController', ['except'=>[
-  'show'
-]]);
-
-Route::resource('question', 'QuestionController', ['except'=>[
-    'show'
+Route::resource('question', 'QuestionController', ['only'=>[
+    'index', 'create', 'store'
 ]]);
 
 Route::group(['middleware' => 'auth'], function () {

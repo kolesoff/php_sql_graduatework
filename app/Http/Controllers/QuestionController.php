@@ -80,15 +80,15 @@ class QuestionController extends Controller
     {
         $user = Auth::user();
 
-        if ($question->status !== 'public' && $request->status === 'public') {
+        if ($question->status != 'public' && $request->status == 'public') {
             Log::info($user->name.' опубликовал вопрос ('.$question->id.') из темы "'.$question->topic->topic.'"');
         }
 
-        if ($question->status !== 'hidden' && $request->status === 'hidden') {
+        if ($question->status != 'hidden' && $request->status == 'hidden') {
             Log::info($user->name.' скрыл вопрос ('.$question->id.') из темы "'.$question->topic->topic.'"');
         }
 
-        if ($question->author !== $request->author || $question->question !== $request->question || $question->answer !== $request->answer) {
+        if ($question->author != $request->author || $question->question != $request->question || $question->answer != $request->answer) {
             Log::info($user->name.' обновил вопрос ('.$question->id.') из темы "'.$question->topic->topic.'"');
         }
 
